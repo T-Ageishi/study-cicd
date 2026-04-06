@@ -3,5 +3,5 @@ on: push
 jobs:
     run:
         runs-on: ubuntu-latest
-        steps:
+          steps:
           - run: date
