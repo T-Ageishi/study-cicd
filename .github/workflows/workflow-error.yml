@@ -1,7 +1,0 @@
-name: Workflow Error
-on: push
-jobs:
-    run:
-        runs-on: ubuntu-latest
-          steps:
-          - run: date
