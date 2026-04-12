@@ -1,0 +1,12 @@
+name: Release
+on:
+    push:
+        branches:
+            - 'release/*'
+jobs:
+    print:
+        runs-on: ubuntu-latest
+        env:
+            ACTOR: ${{ github.actor }}
+        steps:
+            - run: echo "Hello $ACTOR, this is a release workflow!"
