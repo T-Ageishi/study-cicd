@@ -20,3 +20,40 @@
 
 - Settings>Secrets and Variablesで登録したシークレットをワークフロー内で参照できる
 - シークレットは基本的にログマスクされるが、1文字変えるだけで回避できてしまう。そのため、そもそもSecretsはログ出力しないことが大切。
+
+## ステップ間のデータ共有
+
+### ステップ間でデータは引き継がれない
+
+- 1ステップ目で環境変数を定義しても、2つ目のステップでは未定義状態に戻ってしまう。
+
+```yml
+name: Missing share data
+on: push
+jobs:
+  share:
+    runs-on: ubuntu-latest
+    steps:
+      - run: export RESULT="hello"
+      - run: echo "${RESULT}"
+```
+
+### GITHUB_OUTPUT環境変数
+
+- 受け渡し側ステップは、GITHUB_OUTPUT環境変数へ、キーバリュー形式の文字列を書き出す。また、idキーでステップIDを定義する。
+
+```
+- id: <step-id>
+  run: echo "<key>=<value>" >> "${GITHUB_OUTPUT}"
+```
+
+- 受け取り側ステップは、次のようにstepsコンテキストを参照する。
+
+```
+${{ steps.<step-id>.outputs.<key> }}
+```
+
+### GITHUB_ENV環境変数
+
+- グローバル変数的に環境変数を管理できる。
+- ワークフローが大きくなるとバグの温床になりやすいため、基本的にはGITHUB_OUTPUT環境変数を利用する。
