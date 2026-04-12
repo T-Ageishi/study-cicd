@@ -1,9 +1,0 @@
-name: Show Variables
-on: push
-jobs:
-    print-variables:
-        runs-on: ubuntu-latest
-        env:
-            SAMPLE_VARIABLE: ${{ vars.SAMPLE_VARIABLE }}
-        steps:
-            - run: echo "${SAMPLE_VARIABLE}"

@@ -1,9 +1,0 @@
-# pushイベントをトリガーにして、Ubuntuランナーでhelloジョブを実行する。ジョブの内容はstepsに記載。
-name: Hello
-on: push
-jobs:
-  hello:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello, World!"
-      - uses: actions/checkout@v4
