@@ -57,3 +57,7 @@ ${{ steps.<step-id>.outputs.<key> }}
 
 - グローバル変数的に環境変数を管理できる。
 - ワークフローが大きくなるとバグの温床になりやすいため、基本的にはGITHUB_OUTPUT環境変数を利用する。
+
+## GitHub API
+
+- GitHubはプログラムからアクセスできるGitHub APIと呼ばれるAPIを公開している。
